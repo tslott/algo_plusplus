@@ -2,6 +2,7 @@
 
 ## TODO
 
+- [] Read book...
 - [] C++, maybe build some microservice
 - [] Wrap the whole ting in Docker
 - [] Use Kubernetes
