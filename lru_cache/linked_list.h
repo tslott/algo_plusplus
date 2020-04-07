@@ -11,12 +11,15 @@ struct node
 class linked_list
 {
 private:
+    int size;
     node *head, *tail;
 public:
     linked_list();
     ~linked_list();
     void add_node_to_back(int value);
-    void add_node_to_front(int value);
+    node* add_node_to_front(int value);
+    void remove_back_node();
+    void move_node_to_front(node *n);
     void print();
 };
 

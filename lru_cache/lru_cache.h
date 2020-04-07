@@ -5,13 +5,14 @@
 #include "linked_list.h"
 
 using std::string;
+using std::unordered_map;
 
 class lru_cache
 {
 private:
     int size, cache_size;
     linked_list cache_container;
-    std::unordered_map<string, node*> key_mapping;
+    unordered_map<string, node*> key_mapping;
 public:
     lru_cache(int n);
     ~lru_cache();
