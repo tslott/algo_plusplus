@@ -1,4 +1,4 @@
-#include "lru_cache.hpp"
+#include "lru_cache.h"
 
 lru_cache::lru_cache(int n)
 {
@@ -23,6 +23,9 @@ void lru_cache::set(string key, int value)
     }
 }
 
-// lru_cache::get()
+int lru_cache::get(string key)
+{
+    return 42;
+}
 
 // https://bhrigu.me/blog/2017/01/22/lru-cache-c-plus-plus-implementation/

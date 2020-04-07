@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -c -Wall
-EXECUTABLE = run_me
+EXECUTABLE = run_me.out
 OBJECTS = main.o linked_list.o lru_cache.o
 
 build: $(EXECUTABLE)
@@ -11,7 +11,7 @@ $(EXECUTABLE): $(OBJECTS)
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
-$%.o: $%.cpp $%.hpp
+$%.o: $%.cpp $%.h
 	$(CC) $(CFLAGS) $< $@
 
 clean:

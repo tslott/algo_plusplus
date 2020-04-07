@@ -2,7 +2,7 @@
 #define LRU_CACHE_GUARD
 #include <string>
 #include <unordered_map>
-#include "linked_list.hpp"
+#include "linked_list.h"
 
 using std::string;
 
@@ -16,6 +16,7 @@ public:
     lru_cache(int n);
     ~lru_cache();
     void set(string key, int value);
+    int get(string key);
 };
 
 #endif
