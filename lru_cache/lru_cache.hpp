@@ -15,7 +15,7 @@ private:
 public:
     lru_cache(int n);
     ~lru_cache();
-    void lru_cache::set(std::string key, int value);
+    void set(string key, int value);
 };
 
 #endif

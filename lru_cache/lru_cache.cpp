@@ -12,7 +12,7 @@ void lru_cache::set(string key, int value)
 {
     if (size < cache_size)
     {
-        key_mapping.at(key);
+        key_mapping.find(key);
         cache_container.add_node_to_front(value);
 
         size++;
