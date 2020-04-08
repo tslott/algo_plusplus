@@ -18,6 +18,7 @@ public:
     ~lru_cache();
     void set(string key, int value);
     int get(string key);
+    void print();
 };
 
 #endif

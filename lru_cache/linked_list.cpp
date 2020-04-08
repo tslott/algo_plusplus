@@ -10,9 +10,10 @@ linked_list::linked_list()
 
 linked_list::~linked_list(){}
 
-void linked_list::add_node_to_back(int value)
+void linked_list::add_node_to_back(string key, int value)
 {
     node *new_node = new node;
+    (*new_node).key = key;
     (*new_node).value = value;
     (*new_node).next = NULL;
     (*new_node).prev = NULL;
@@ -32,9 +33,10 @@ void linked_list::add_node_to_back(int value)
     size++;
 }
 
-node* linked_list::add_node_to_front(int value)
+node* linked_list::add_node_to_front(string key, int value)
 {
     node *new_node = new node;
+    (*new_node).key = key;
     (*new_node).value = value;
     (*new_node).next = NULL;
     (*new_node).prev = NULL;
@@ -81,17 +83,33 @@ void linked_list::remove_back_node()
 
 void linked_list::move_node_to_front(node *n)
 {
-    // Remove node from place in linked list and connect adjacent nodes
-    node *prev = (*n).prev;
-    node *next = (*n).next;
-    (*prev).next = next;
-    (*next).prev = prev;
+    if (head == tail) return;
+
+    if (n == tail)
+    {
+        // Remove node from tail
+        node *prev = (*n).prev;
+        (*prev).next = NULL;
+    }
+    else
+    {
+        // Remove node from place in linked list and connect adjacent nodes
+        node *prev = (*n).prev;
+        node *next = (*n).next;
+        (*prev).next = next;
+        (*next).prev = prev;
+    }
 
     // Set n as new head
-    node *head_next = (*head).next;
+    node *current_head = head;
     (*n).prev = NULL;
-    (*n).next = head_next;
+    (*n).next = current_head;
     head = n;
+}
+
+string linked_list::get_tail_key()
+{
+    return (*tail).key;
 }
 
 void linked_list::print()

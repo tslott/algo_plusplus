@@ -1,3 +1,4 @@
+#include <iostream>
 #include "lru_cache.h"
 
 lru_cache::lru_cache(int n)
@@ -10,44 +11,37 @@ lru_cache::~lru_cache(){}
 
 void lru_cache::set(string key, int value)
 {
-    if (size < cache_size)
+    // Check if value already exists
+    if (key_mapping.find(key) != key_mapping.end())  // Value already exists
     {
-        // Check if value already exists
-        if (key_mapping.find(key) != key_mapping.end())  // Value already exists
-        {
-            (*key_mapping[key]).value = value;
-            cache_container.move_node_to_front(key_mapping[key]);
-        }
-        else  // Value does not exists
-        {
-            node* new_item = cache_container.add_node_to_front(value);
-            key_mapping[key] = new_item;
-        }
-
-        // Increment cache size
-        size++;
+        (*key_mapping[key]).value = value;
+        cache_container.move_node_to_front(key_mapping[key]);
     }
-    else
+    else  // Value does not exists
     {
-        // Check if value already exists
-        if (key_mapping.find(key) != key_mapping.end())  // Value already exists
+        if (size == cache_size)
         {
-            (*key_mapping[key]).value = value;
-            cache_container.move_node_to_front(key_mapping[key]);
-        }
-        else  // Value does not exists
-        {
+            // Remove least used node from cache container and key map
+            string old_key = cache_container.get_tail_key();
+            key_mapping.erase(old_key);
             cache_container.remove_back_node();
-
-            node* new_item = cache_container.add_node_to_front(value);
-            key_mapping[key] = new_item;
+            size--;  // Decrease cache size
         }
+
+        node* new_item = cache_container.add_node_to_front(key, value);
+        key_mapping[key] = new_item;
+        size++;  // Increment cache size
     }
 }
 
 int lru_cache::get(string key)
 {
     return -1;
+}
+
+void lru_cache::print()
+{
+    cache_container.print();
 }
 
 // https://bhrigu.me/blog/2017/01/22/lru-cache-c-plus-plus-implementation/
