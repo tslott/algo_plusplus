@@ -29,6 +29,7 @@ int main()
     my_cache.set("what3", 26);
     my_cache.print();
     std::cout << my_cache.get("morten") << std::endl;
+    std::cout << my_cache.get("fisk") << std::endl;
 
     return 0;
 }

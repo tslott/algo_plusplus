@@ -83,7 +83,7 @@ void linked_list::remove_back_node()
 
 void linked_list::move_node_to_front(node *n)
 {
-    if (head == tail) return;
+    if (head == tail || n == head) return;
 
     if (n == tail)
     {

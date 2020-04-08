@@ -36,6 +36,13 @@ void lru_cache::set(string key, int value)
 
 int lru_cache::get(string key)
 {
+    // Check if value exists
+    if (key_mapping.find(key) != key_mapping.end())
+    {
+        cache_container.move_node_to_front(key_mapping[key]);
+        return (*key_mapping[key]).value;
+    }
+
     return -1;
 }
 
