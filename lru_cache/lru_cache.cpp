@@ -1,15 +1,18 @@
 #include <iostream>
 #include "lru_cache.h"
 
-lru_cache::lru_cache(int n)
+template <class K, class V>
+lru_cache<K,V>::lru_cache(int n)
 {
     size = 0;
     cache_size = n;
 }
 
-lru_cache::~lru_cache(){}
+template <class K, class V>
+lru_cache<K,V>::~lru_cache(){}
 
-void lru_cache::set(string key, int value)
+template <class K, class V>
+void lru_cache<K,V>::set(K key, V value)
 {
     // Check if value already exists
     if (key_mapping.find(key) != key_mapping.end())  // Value already exists
@@ -22,19 +25,20 @@ void lru_cache::set(string key, int value)
         if (size == cache_size)
         {
             // Remove least used node from cache container and key map
-            string old_key = cache_container.get_tail_key();
+            K old_key = cache_container.get_tail_key();
             key_mapping.erase(old_key);
             cache_container.remove_back_node();
             size--;  // Decrease cache size
         }
 
-        node* new_item = cache_container.add_node_to_front(key, value);
+        node<K,V>* new_item = cache_container.add_node_to_front(key, value);
         key_mapping[key] = new_item;
         size++;  // Increment cache size
     }
 }
 
-int lru_cache::get(string key)
+template <class K, class V>
+V lru_cache<K,V>::get(K key)
 {
     // Check if value exists
     if (key_mapping.find(key) != key_mapping.end())
@@ -43,12 +47,13 @@ int lru_cache::get(string key)
         return (*key_mapping[key]).value;
     }
 
-    return -1;
+    // Return "default" value if key does not exist
+    V obj = V();
+    return obj;
 }
 
-void lru_cache::print()
+template <class K, class V>
+void lru_cache<K,V>::print()
 {
     cache_container.print();
 }
-
-// https://bhrigu.me/blog/2017/01/22/lru-cache-c-plus-plus-implementation/

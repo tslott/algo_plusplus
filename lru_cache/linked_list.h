@@ -4,27 +4,29 @@
 
 using std::string;
 
+template <class K, class V>
 struct node
 {
-    string key;
-    int value;
+    K key;
+    V value;
     node *next;
     node *prev;
 };
 
+template <class K, class V>
 class linked_list
 {
 private:
     int size;
-    node *head, *tail;
+    node<K,V> *head, *tail;
 public:
     linked_list();
     ~linked_list();
-    void add_node_to_back(string key, int value);
-    node* add_node_to_front(string key, int value);
+    void add_node_to_back(K key, V value);
+    node<K,V>* add_node_to_front(K key, V value);
     void remove_back_node();
-    void move_node_to_front(node *n);
-    string get_tail_key();
+    void move_node_to_front(node<K,V> *n);
+    K get_tail_key();
     void print();
 };
 
