@@ -14,13 +14,8 @@ lru_cache<K,V>::~lru_cache(){}
 template <class K, class V>
 void lru_cache<K,V>::set(K key, V value)
 {
-    // Check if value already exists
-    if (key_mapping.find(key) != key_mapping.end())  // Value already exists
-    {
-        (*key_mapping[key]).value = value;
-        cache_container.move_node_to_front(key_mapping[key]);
-    }
-    else  // Value does not exists
+    // // Check if value already exists
+    if (key_mapping.find(key) == key_mapping.end())  // Value does not exist
     {
         if (size == cache_size)
         {
@@ -28,12 +23,18 @@ void lru_cache<K,V>::set(K key, V value)
             K old_key = cache_container.get_tail_key();
             key_mapping.erase(old_key);
             cache_container.remove_back_node();
+
             size--;  // Decrease cache size
         }
 
         node<K,V>* new_item = cache_container.add_node_to_front(key, value);
         key_mapping[key] = new_item;
         size++;  // Increment cache size
+    }
+    else  // Value already exists
+    {
+        (*key_mapping[key]).value = value;
+        cache_container.move_node_to_front(key_mapping[key]);
     }
 }
 
