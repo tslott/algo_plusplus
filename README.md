@@ -4,4 +4,5 @@
 
 - [x] Intro C++ stuff
 - [x] Build my own LRUCache, use it for something
-- [] Build another algorithm/data struture in C++, Use multithreading and/or multiprocessing
+- [] Build merge sort, Use multithreading for parallel search
+- [] Build parallel matrix multiplication
