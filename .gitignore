@@ -149,5 +149,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Datasets for ML model
-dataops/datasets/*
+# Mac stuff
+.DS_Store
+
+# Datasets
+search_index/CORD-19*
