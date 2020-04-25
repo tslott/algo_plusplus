@@ -12,7 +12,7 @@ main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 $%.o: $%.cpp $%.h
-	$(CC) $(CFLAGS) $^ $@
+	$(CC) $(CFLAGS) $< $@
 
 clean:
 	rm -f *.o $(EXECUTABLE)
