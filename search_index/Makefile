@@ -11,8 +11,11 @@ $(EXECUTABLE): $(OBJECTS)
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
+inverted_index.o: inverted_index.cpp inverted_index.h
+	$(CC) $(CFLAGS) inverted_index.cpp
+
 $%.o: $%.cpp $%.h
-	$(CC) $(CFLAGS) $^ $@
+	$(CC) $(CFLAGS) $< $@
 
 clean:
 	rm -f *.o $(EXECUTABLE)
