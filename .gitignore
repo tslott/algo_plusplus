@@ -153,4 +153,4 @@ dmypy.json
 .DS_Store
 
 # Datasets
-search_index/CORD-19*
+search_index/txt_data/*
