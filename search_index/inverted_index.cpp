@@ -1,6 +1,6 @@
 #include "inverted_index.h"
 
-inverted_index::inverted_index(string documents_folder){
+inverted_index::inverted_index(const string &documents_folder){
     // Build index from all documents
     // Use multithreading
 
@@ -11,7 +11,7 @@ inverted_index::inverted_index(string documents_folder){
 
 inverted_index::~inverted_index(){}
 
-void inverted_index::insert_document(string file_name)
+void inverted_index::insert_document(const string &file_name)
 {
     // Extract document id from file name
     string doc_id = file_name.substr(0, file_name.size()-4);  // Remove ".txt"
@@ -23,15 +23,7 @@ void inverted_index::insert_document(string file_name)
     string word;
     while (file >> word)
     {
-        // Clean word for all non-alpha characters
-        word.erase(
-            std::remove_if(
-                word.begin(),
-                word.end(),
-                [](unsigned char c) { return !std::isalpha(c); }
-            ),
-            word.end()
-        );
+        clean_word(word);
 
         // Convert string to lowercase
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
@@ -41,7 +33,20 @@ void inverted_index::insert_document(string file_name)
     }
 }
 
-void inverted_index::search(string search_word)
+void inverted_index::clean_word(string &word)
+{
+    // Clean word for all non-alpha characters
+    word.erase(
+        std::remove_if(
+            word.begin(),
+            word.end(),
+            [](unsigned char c) { return !std::isalpha(c); }
+        ),
+        word.end()
+    );
+}
+
+void inverted_index::search(const string &search_word)
 {
     if (index.find(search_word) != index.end())
     {

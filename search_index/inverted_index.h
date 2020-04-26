@@ -17,11 +17,12 @@ class inverted_index
 {
 private:
     map<string, map<string, vector<int> > > index;
+    void clean_word(string &word);
 public:
-    inverted_index(string documents_folder);
+    inverted_index(const string &documents_folder);
     ~inverted_index();
-    void insert_document(string file_name);
-    void search(string search_word);
+    void insert_document(const string &file_name);
+    void search(const string &search_word);
     void print();
 };
 
