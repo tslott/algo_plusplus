@@ -6,14 +6,17 @@
 #include <fstream>
 #include <algorithm>
 #include <vector>
+#include <filesystem>
 
 using std::string;
 using std::map;
+using std::cout;
+using std::vector;
 
 class inverted_index
 {
 private:
-    map<string, map<string, std::vector<int> > > index;
+    map<string, map<string, vector<int> > > index;
 public:
     inverted_index(string documents_folder);
     ~inverted_index();
