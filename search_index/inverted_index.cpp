@@ -1,13 +1,6 @@
 #include "inverted_index.h"
 
-inverted_index::inverted_index(const string &documents_folder){
-    // Build index from all documents
-    // Use multithreading
-
-    // Loop files in directory of documents
-    for(auto& p: std::filesystem::directory_iterator(documents_folder))
-        insert_document(p.path().string());
-}
+inverted_index::inverted_index(){}
 
 inverted_index::~inverted_index(){}
 
@@ -21,6 +14,7 @@ void inverted_index::insert_document(const string &file_name)
     std::ifstream file;
     file.open(file_name);
     string word;
+    int word_position = 0;
     while (file >> word)
     {
         clean_word(word);
@@ -29,7 +23,7 @@ void inverted_index::insert_document(const string &file_name)
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
         // Insert word into inverted index
-        index[word][doc_id].push_back(0);
+        index[word][doc_id].push_back(word_position++);
     }
 }
 
@@ -44,6 +38,21 @@ void inverted_index::clean_word(string &word)
         ),
         word.end()
     );
+}
+
+void inverted_index::insert_multiple_documents(const string &documents_folder)
+{
+    // Loop files in directory of documents
+    for(auto& p: std::filesystem::directory_iterator(documents_folder))
+        insert_document(p.path().string());
+
+    // Use multithreading
+    // vector<thread> threads;
+
+    // for(auto& p: std::filesystem::directory_iterator(documents_folder))
+    //     threads.push_back(thread(&inverted_index::insert_document, this, p.path().string()));
+
+    // for (auto& th : threads) th.join();
 }
 
 void inverted_index::search(const string &search_word)

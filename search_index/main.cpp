@@ -5,7 +5,8 @@ using std::cout, std::cin;
 
 int main()
 {
-    inverted_index search_index("txt_data");
+    inverted_index search_index;
+    search_index.insert_multiple_documents("txt_data");
 
     string search_word;
     string exit_term = "$";
