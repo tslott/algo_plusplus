@@ -8,6 +8,8 @@ int main()
     inverted_index search_index;
     search_index.insert_multiple_documents("txt_data");
 
+    cout << "Word count: " << search_index.get_word_count() << "\n";
+
     string search_word;
     string exit_term = "$";
 

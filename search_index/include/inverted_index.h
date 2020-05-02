@@ -27,6 +27,7 @@ public:
     void insert_multiple_documents(const string &documents_folder);
     void search(const string &search_word);
     void print();
+    int get_word_count();
 };
 
 #endif

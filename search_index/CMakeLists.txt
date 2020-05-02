@@ -29,4 +29,11 @@ include_directories(include)
 ########################################
 
 FILE(GLOB SOURCES ./src/*.cpp)
-ADD_EXECUTABLE(run_me.out ${SOURCES})
+ADD_EXECUTABLE(run_me.out main.cpp ${SOURCES})
+
+########################################
+# TESTING
+########################################
+
+enable_testing()
+add_subdirectory(tests)

@@ -80,3 +80,8 @@ void inverted_index::print()
         cout << "\n";
     }
 }
+
+int inverted_index::get_word_count()
+{
+    return index.size();
+}
