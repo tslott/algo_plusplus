@@ -17,7 +17,7 @@ int main()
     {
         cout << "Please enter search word (exit with '" << exit_term << "'): ";
         cin >> search_word;
-        search_index.search(search_word);
+        search_index.search_print(search_word);
     }
     while (search_word != exit_term);
 

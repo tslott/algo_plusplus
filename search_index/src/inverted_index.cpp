@@ -1,11 +1,19 @@
 #include "inverted_index.h"
 
-inverted_index::inverted_index(){}
+inverted_index::inverted_index(){
+    doc_count = 0;
+}
 
 inverted_index::~inverted_index(){}
 
 void inverted_index::insert_document(const string &file_name)
 {
+    // std::string_view("string_view").ends_with("View");
+
+    // Check of file is DS_Store, macOS stuff...
+    if (file_name.ends_with(".DS_Store"))
+        return;
+
     // Extract document id from file name
     string doc_id = file_name.substr(0, file_name.size()-4);  // Remove ".txt"
     doc_id = doc_id.substr(9, doc_id.size());  // Remove "txt_data/"
@@ -25,6 +33,8 @@ void inverted_index::insert_document(const string &file_name)
         // Insert word into inverted index
         index[word][doc_id].push_back(word_position++);
     }
+
+    doc_count++;
 }
 
 void inverted_index::clean_word(string &word)
@@ -55,15 +65,27 @@ void inverted_index::insert_multiple_documents(const string &documents_folder)
     // for (auto& th : threads) th.join();
 }
 
-void inverted_index::search(const string &search_word)
+map<string, vector<int> >* inverted_index::search(const string &search_word)
 {
+    map<string, vector<int> >* doc_ids = nullptr;
+
     if (index.find(search_word) != index.end())
     {
         // Extract inner map from index
-        map<string, vector<int> > doc_ids = index.find(search_word)->second;
+        doc_ids = &(index.find(search_word)->second);
+    }
 
+    return doc_ids;
+}
+
+void inverted_index::search_print(const string &search_word)
+{
+    map<string, vector<int> >* doc_ids = search(search_word);
+
+    if (doc_ids)
+    {
         // Print keys/doc_ids from inner map
-        for (map<string, vector<int> >::iterator it = doc_ids.begin(); it != doc_ids.end(); ++it)
+        for (map<string, vector<int> >::iterator it = (*doc_ids).begin(); it != (*doc_ids).end(); ++it)
         {
             cout << it->first << "\n";
         }
@@ -84,4 +106,9 @@ void inverted_index::print()
 int inverted_index::get_word_count()
 {
     return index.size();
+}
+
+int inverted_index::get_doc_count()
+{
+    return doc_count;
 }
