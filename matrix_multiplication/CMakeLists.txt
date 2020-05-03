@@ -3,7 +3,7 @@
 ########################################
 
 cmake_minimum_required(VERSION 3.17.0)
-project(search_index)
+project(matrix_multiplication)
 
 ########################################
 # C++ VERSIONING
@@ -30,10 +30,3 @@ include_directories(include)
 
 FILE(GLOB SOURCES ./src/*.cpp)
 ADD_EXECUTABLE(run_me.out main.cpp ${SOURCES})
-
-########################################
-# TESTING
-########################################
-
-enable_testing()
-add_subdirectory(tests)
