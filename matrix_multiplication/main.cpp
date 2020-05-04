@@ -6,9 +6,9 @@ using std::cout, std::cin;
 int main()
 {
     // Get size of matrices
-    int n;
-    cout << "Enter size of square matrices: ";
-    cin >> n;
+    int n = 500;
+    // cout << "Enter size of square matrices: ";
+    // cin >> n;
 
     // Initialize matrices
     int mat1[n][n], mat2[n][n], mat3[n][n];
@@ -21,9 +21,16 @@ int main()
         }
     }
 
-    print_mat(mat1[0], n);
+    // print_mat(mat1[0], n);
+    // cout << "X\n";
+    // print_mat(mat2[0], n);
+    // cout << "=\n";
 
     // Multiply matrices
+    // mat_mult(mat1[0], mat2[0], mat3[0], n);
+    mat_mult_multithread(mat1[0], mat2[0], mat3[0], n);
+
+    // print_mat(mat3[0], n);
 
     return 0;
 }
